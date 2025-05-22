@@ -1,0 +1,85 @@
+# 1) Cadastro e busca de notas de alunos
+alunos = {}
+
+while True:
+    nome = input("Digite o nome do aluno (ou 'sair' para encerrar): ")
+    if nome.lower() == 'sair':
+        break
+    notas = []
+    for i in range(1, 4):
+        nota = float(input(f"Digite a nota {i} do aluno {nome}: "))
+        notas.append(nota)
+    alunos[nome] = notas
+
+print("\nAlunos com média maior ou igual a 7:")
+for nome, notas in alunos.items():
+    media = sum(notas) / len(notas)
+    if media >= 7:
+        print(f"{nome} - Média: {media:.2f}")
+
+pesquisa = input("\nDigite o nome do aluno para consulta: ")
+if pesquisa in alunos:
+    notas = alunos[pesquisa]
+    media = sum(notas) / len(notas)
+    if media >= 7:
+        situacao = "Aprovado"
+    elif media >= 5:
+        situacao = "Recuperação"
+    else:
+        situacao = "Reprovado"
+    print(f"{pesquisa} - Média: {media:.2f} - Situação: {situacao}")
+else:
+    print("Aluno não encontrado.")
+
+# 2) Estoque de produtos
+estoque_prod = {}
+
+while True:
+    produto = input("\nDigite o nome do produto para cadastrar (ou 'sair'): ")
+    if produto.lower() == 'sair':
+        break
+    quantidade = int(input(f"Digite a quantidade de '{produto}': "))
+    estoque_prod[produto] = quantidade
+
+produto_consulta = input("\nDigite o nome do produto para consultar: ")
+if produto_consulta in estoque_prod:
+    print(f"Quantidade de '{produto_consulta}': {estoque_prod[produto_consulta]}")
+else:
+    print("Produto não encontrado.")
+
+produto_compra = input("\nDigite o nome do produto para comprar: ")
+if produto_compra in estoque_prod:
+    qtd = int(input("Digite a quantidade a ser comprada: "))
+    if qtd <= estoque_prod[produto_compra]:
+        estoque_prod[produto_compra] -= qtd
+        print(f"Compra realizada. Estoque restante: {estoque_prod[produto_compra]}")
+    else:
+        print("Quantidade indisponível.")
+else:
+    print("Produto não encontrado.")
+
+# 3) Frequência de letras em uma frase
+frase = input("\nDigite uma frase: ")
+freq = {}
+
+for letra in frase.lower():
+    if letra.isalpha():
+        freq[letra] = freq.get(letra, 0) + 1
+
+print("Frequência das letras:")
+print(freq)
+
+# 4) Votos de candidatos
+votos = {}
+
+while True:
+    voto = input("\nDigite o nome do candidato (ou 'fim' para encerrar): ")
+    if voto.lower() == 'fim':
+        break
+    votos[voto] = votos.get(voto, 0) + 1
+
+if votos:
+    vencedor = max(votos, key=votos.get)
+    print(f"\nVencedor: {vencedor} com {votos[vencedor]} votos.")
+else:
+    print
